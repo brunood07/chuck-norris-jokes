@@ -1,35 +1,43 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import explosion from '../../sounds/beast-explosion.mp3';
 import { Jokes } from '../../components/';
-import { getJokes } from '../../services/';
+
+import explosion from '../../sounds/beast-explosion.mp3';
 
 const audio = new Audio(explosion);
 
 export function App() {
   const isMounted = useRef(true);
-  const [joke, setJoke] = useState({ joke: 'Loading Joke' });
+  const [joke, setJoke] = useState();
 
-  const onUpdate = async () => {
-    const resJoke = await getJokes();
+  const getJokes = () => {
+      fetch('http://api.icndb.com/jokes/random')
+        .then(res => res.json())
+        .then(data => setJoke(data.value.joke)
+      )
+  }
+
+  const onUpdate = () => {
+    const resJoke = getJokes();
 
     if (isMounted.current) {
       setJoke(resJoke);
       audio.play();
     }
-  };
+  }
 
   useEffect(() => {
     onUpdate();
 
     return () => {
       isMounted.current = false;
-    };
-  }, []);
+    }
+
+  }, [])
 
   return (
     <Content>
-      <Jokes {...joke} onUpdate={onUpdate} />
+      <Jokes joke={joke} onUpdate={onUpdate} />
     </Content>
   );
 }

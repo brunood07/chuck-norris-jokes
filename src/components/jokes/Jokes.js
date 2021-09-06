@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { string, func } from 'prop-types';
 import { Button } from '../button';
 
 export const Jokes = ({ joke, onUpdate = () => {}}) => {
@@ -11,10 +10,6 @@ export const Jokes = ({ joke, onUpdate = () => {}}) => {
     );
 };
 
-Jokes.propTypes = {
-    joke: string,
-    onUpdate: func
-};
 
 const Wrapper = styled.div`
     display: flex;
