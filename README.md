@@ -6,7 +6,7 @@ The project is a web application created with React, when you click on randomize
 
 # LIBRARIES
 
-## REACT
-## STYLED-COMPONENTS
-## MSW
-## PROP-TYPES
+* REACT
+* STYLED-COMPONENTS
+* TESTING-LIBRARY/REACT
+* PROP-TYPES
